@@ -5,6 +5,8 @@ import { CreateCampaign } from './components/CreateCampaign';
 import { Header } from './components/Header';
 import { Dashboard } from './components/Dashboard';
 import { TransactionHistory } from './components/TransactionHistory';
+import { Login } from './components/Login';
+import { getStoredAuth, logout, AuthState } from './blockchain/auth';
 import {
   connectWallet,
   getCurrentAccount,
@@ -72,7 +74,8 @@ export type RewardTier = {
 };
 
 export default function App() {
-  const [view, setView] = useState<'explore' | 'create' | 'dashboard' | 'history'>('explore');
+  const [view, setView] = useState<'explore' | 'create' | 'dashboard' | 'history' | 'login'>('login');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [selectedCampaign, setSelectedCampaign] = useState<Campaign | null>(null);
   const [walletConnected, setWalletConnected] = useState(false);
   const [userAddress, setUserAddress] = useState<string>('');
@@ -172,28 +175,72 @@ export default function App() {
     const checkWallet = async () => {
       try {
         const account = await getCurrentAccount();
+        const storedAuth = getStoredAuth();
+
         if (mounted && account) {
           setUserAddress(account);
           setWalletConnected(true);
+
+          // Check if we have a valid session for this address
+          if (storedAuth.isAuthenticated && storedAuth.address?.toLowerCase() === account.toLowerCase()) {
+            setIsAuthenticated(true);
+            if (view === 'login') {
+              setView('explore');
+            }
+          } else {
+            setIsAuthenticated(false);
+            if (view !== 'login') {
+              setView('login');
+            }
+          }
+        } else {
+          // No wallet connected
+          setIsAuthenticated(false);
+          setView('login');
         }
       } catch (error) {
         console.error('Error checking wallet:', error);
+        setView('login');
       }
     };
 
-    checkWallet();
-    loadCampaigns();
+    const initializeApp = async () => {
+      await checkWallet();
+
+      // Delay campaign loading until we are sure about auth state
+      if (mounted && view !== 'login') {
+        loadCampaigns();
+      }
+    };
+
+    initializeApp();
 
     // Set up event listeners with cleanup functions
-    accountsChangedCleanup.current = onAccountsChanged((account) => {
+    accountsChangedCleanup.current = onAccountsChanged(async (accounts) => {
+      const account = accounts && accounts.length > 0 ? accounts[0] : null;
       if (mounted) {
         if (account) {
-          setUserAddress(account);
-          setWalletConnected(true);
-          toast.info('Wallet account changed');
+          // If account changes, we need to re-verify signature unless it matches stored session
+          const stored = getStoredAuth();
+          if (stored.address && stored.address.toLowerCase() === account.toLowerCase()) {
+            setUserAddress(account);
+            setWalletConnected(true);
+            setIsAuthenticated(true);
+          } else {
+            // New account -> logout and require re-signing
+            logout();
+            setUserAddress(account);
+            setWalletConnected(true);
+            setIsAuthenticated(false);
+            setView('login');
+            toast.info('Account changed. Please login again.');
+          }
         } else {
+          logout();
           setUserAddress('');
           setWalletConnected(false);
+          setIsAuthenticated(false);
+          setView('login');
           toast.info('Wallet disconnected');
         }
       }
@@ -220,10 +267,10 @@ export default function App() {
       }
       removeListeners();
     };
-  }, [loadCampaigns]);
+  }, [loadCampaigns, view]);
 
   // Handle wallet connection
-  const handleConnectWallet = async () => {
+  const handleConnectWallet = async (): Promise<string> => {
     try {
       const address = await connectWallet();
       setUserAddress(address);
@@ -231,17 +278,22 @@ export default function App() {
       toast.success('Wallet connected successfully!');
       // Reload campaigns after connecting
       await loadCampaigns();
+      return address;
     } catch (error: any) {
       console.error('Error connecting wallet:', error);
       toast.error(error.message || 'Failed to connect wallet');
+      throw error;
     }
   };
 
   // Handle wallet disconnection
   const handleDisconnectWallet = useCallback(() => {
+    logout();
     setUserAddress('');
     setWalletConnected(false);
+    setIsAuthenticated(false);
     setSelectedCampaign(null);
+    setView('login');
     toast.info('Wallet disconnected');
   }, []);
 
@@ -456,6 +508,20 @@ export default function App() {
           />
         )}
 
+        {/* Login view */}
+        {view === 'login' && (
+          <Login
+            onLoginSuccess={(address) => {
+              setIsAuthenticated(true);
+              setUserAddress(address);
+              setWalletConnected(true);
+              setView('explore');
+              loadCampaigns();
+            }}
+            onConnectWallet={handleConnectWallet}
+            walletConnected={walletConnected}
+          />
+        )}
         {/* Dashboard view */}
         {view === 'dashboard' && (
           <Dashboard campaigns={campaigns} userAddress={userAddress} />

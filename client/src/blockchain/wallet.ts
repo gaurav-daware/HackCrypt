@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import { LOCAL_CHAIN_ID, LOCAL_NETWORK } from "./config";
 
 // Add window.ethereum type definition
+// Add window.ethereum type definition
 declare global {
     interface Window {
         ethereum: any;

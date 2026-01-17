@@ -1,8 +1,8 @@
 import { Wallet, ArrowLeft, Coins, TrendingUp, History, Plus } from 'lucide-react';
 
 type HeaderProps = {
-  view: 'explore' | 'create' | 'dashboard' | 'history';
-  setView: (view: 'explore' | 'create' | 'dashboard' | 'history') => void;
+  view: 'explore' | 'create' | 'dashboard' | 'history' | 'login';
+  setView: (view: 'explore' | 'create' | 'dashboard' | 'history' | 'login') => void;
   walletConnected: boolean;
   setWalletConnected: () => void;
   userAddress: string;
@@ -34,61 +34,56 @@ export function Header({ view, setView, walletConnected, setWalletConnected, use
               </div>
             </div>
           </div>
-          
+
           <nav className="hidden md:flex items-center gap-2">
             <button
               onClick={() => setView('explore')}
-              className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 ${
-                view === 'explore'
-                  ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-              }`}
+              className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 ${view === 'explore'
+                ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                }`}
             >
               <TrendingUp className="w-4 h-4" />
               Explore
             </button>
             <button
               onClick={() => setView('create')}
-              className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 ${
-                view === 'create'
-                  ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-              }`}
+              className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 ${view === 'create'
+                ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                }`}
             >
               <Plus className="w-4 h-4" />
               Create
             </button>
             <button
               onClick={() => setView('dashboard')}
-              className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 ${
-                view === 'dashboard'
-                  ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-              }`}
+              className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 ${view === 'dashboard'
+                ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                }`}
             >
               <Coins className="w-4 h-4" />
               Dashboard
             </button>
             <button
               onClick={() => setView('history')}
-              className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 ${
-                view === 'history'
-                  ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-              }`}
+              className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 ${view === 'history'
+                ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                }`}
             >
               <History className="w-4 h-4" />
               History
             </button>
           </nav>
-          
+
           <button
             onClick={setWalletConnected}
-            className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${
-              walletConnected
-                ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                : 'bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700'
-            }`}
+            className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${walletConnected
+              ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+              : 'bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700'
+              }`}
           >
             <Wallet className="w-4 h-4" />
             {walletConnected ? (
@@ -98,49 +93,45 @@ export function Header({ view, setView, walletConnected, setWalletConnected, use
             )}
           </button>
         </div>
-        
+
         {/* Mobile Navigation */}
         <nav className="md:hidden flex items-center gap-2 mt-4 overflow-x-auto pb-2">
           <button
             onClick={() => setView('explore')}
-            className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 text-sm whitespace-nowrap ${
-              view === 'explore'
-                ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-            }`}
+            className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 text-sm whitespace-nowrap ${view === 'explore'
+              ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+              : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+              }`}
           >
             <TrendingUp className="w-4 h-4" />
             Explore
           </button>
           <button
             onClick={() => setView('create')}
-            className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 text-sm whitespace-nowrap ${
-              view === 'create'
-                ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-            }`}
+            className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 text-sm whitespace-nowrap ${view === 'create'
+              ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+              : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+              }`}
           >
             <Plus className="w-4 h-4" />
             Create
           </button>
           <button
             onClick={() => setView('dashboard')}
-            className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 text-sm whitespace-nowrap ${
-              view === 'dashboard'
-                ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-            }`}
+            className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 text-sm whitespace-nowrap ${view === 'dashboard'
+              ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+              : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+              }`}
           >
             <Coins className="w-4 h-4" />
             Dashboard
           </button>
           <button
             onClick={() => setView('history')}
-            className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 text-sm whitespace-nowrap ${
-              view === 'history'
-                ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-            }`}
+            className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 text-sm whitespace-nowrap ${view === 'history'
+              ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+              : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+              }`}
           >
             <History className="w-4 h-4" />
             History

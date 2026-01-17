@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Plus, Upload, X, AlertCircle, Loader2 } from 'lucide-react';
 import { Campaign, Milestone, RewardTier } from '../App';
 import { createCampaign, waitForTransaction, formatError } from '../blockchain/contract';
-import { getSigner } from '../blockchain/wallet';
+import { getStoredAuth } from '../blockchain/auth';
 import { toast } from 'sonner';
 
 type CreateCampaignProps = {
@@ -20,7 +20,7 @@ export function CreateCampaign({ onCreateCampaign, walletConnected, userAddress,
   const [duration, setDuration] = useState('30');
   const [category, setCategory] = useState('Social Impact');
   const [imageUrl, setImageUrl] = useState('');
-  
+
   const [milestones, setMilestones] = useState<Milestone[]>([
     {
       id: 'm1',
@@ -102,8 +102,9 @@ export function CreateCampaign({ onCreateCampaign, walletConnected, userAddress,
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!walletConnected || !userAddress) {
-      toast.error('Please connect your wallet first');
+    const auth = getStoredAuth();
+    if (!walletConnected || !userAddress || !auth.isAuthenticated) {
+      toast.error('Please login with your wallet first');
       return;
     }
 
@@ -199,7 +200,7 @@ export function CreateCampaign({ onCreateCampaign, walletConnected, userAddress,
           {/* Basic Information */}
           <div className="space-y-6">
             <h2 className="text-xl font-bold text-white">Basic Information</h2>
-            
+
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">
                 Campaign Title *
@@ -229,10 +230,10 @@ export function CreateCampaign({ onCreateCampaign, walletConnected, userAddress,
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
-                Funding Goal (MATIC) *
-              </label>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">
+                  Funding Goal (MATIC) *
+                </label>
                 <input
                   type="number"
                   value={goal}

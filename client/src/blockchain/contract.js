@@ -338,5 +338,9 @@ export function formatError(error) {
     return "Network error. Please check your connection and try again.";
   }
 
+  if (error.message.includes("missing revert data")) {
+    return "Could not connect to the contract. Please ensure you are on the Localhost network and the node is running.";
+  }
+
   return error.message || "An error occurred. Please try again.";
 }
