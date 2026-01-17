@@ -5,7 +5,7 @@ import {
 } from 'lucide-react';
 import { Campaign, Contribution } from '../App';
 import { donateToCampaign, waitForTransaction, formatError, getContribution, getDonators } from '../blockchain/contract';
-import { POLYGON_AMOY_BLOCK_EXPLORER } from '../blockchain/config';
+import { LOCAL_BLOCK_EXPLORER } from '../blockchain/config';
 import { toast } from 'sonner';
 
 type CampaignDetailProps = {
@@ -109,12 +109,12 @@ export function CampaignDetail({ campaign, onContribute, onVote, userAddress, wa
       toast.success('Donation successful!', {
         description: (
           <a
-            href={`${POLYGON_AMOY_BLOCK_EXPLORER}tx/${receipt.hash}`}
+            href={`${LOCAL_BLOCK_EXPLORER}tx/${receipt.hash}`}
             target="_blank"
             rel="noopener noreferrer"
             className="underline"
           >
-            View on PolygonScan
+            View on Local Explorer
           </a>
         ),
       });
@@ -179,9 +179,9 @@ export function CampaignDetail({ campaign, onContribute, onVote, userAddress, wa
               {campaign.category}
             </span>
             <span className={`px-3 py-1 rounded-lg text-sm font-medium ${campaign.status === 'active' ? 'bg-green-500/20 border border-green-500/30 text-green-400' :
-                campaign.status === 'successful' ? 'bg-blue-500/20 border border-blue-500/30 text-blue-400' :
-                  campaign.status === 'failed' ? 'bg-red-500/20 border border-red-500/30 text-red-400' :
-                    'bg-slate-500/20 border border-slate-500/30 text-slate-400'
+              campaign.status === 'successful' ? 'bg-blue-500/20 border border-blue-500/30 text-blue-400' :
+                campaign.status === 'failed' ? 'bg-red-500/20 border border-red-500/30 text-red-400' :
+                  'bg-slate-500/20 border border-slate-500/30 text-slate-400'
               }`}>
               {campaign.status.charAt(0).toUpperCase() + campaign.status.slice(1)}
             </span>
@@ -209,8 +209,8 @@ export function CampaignDetail({ campaign, onContribute, onVote, userAddress, wa
             <button
               onClick={() => setActiveTab('overview')}
               className={`flex-1 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === 'overview'
-                  ? 'bg-blue-500 text-white'
-                  : 'text-slate-400 hover:text-white'
+                ? 'bg-blue-500 text-white'
+                : 'text-slate-400 hover:text-white'
                 }`}
             >
               Overview
@@ -218,8 +218,8 @@ export function CampaignDetail({ campaign, onContribute, onVote, userAddress, wa
             <button
               onClick={() => setActiveTab('milestones')}
               className={`flex-1 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === 'milestones'
-                  ? 'bg-blue-500 text-white'
-                  : 'text-slate-400 hover:text-white'
+                ? 'bg-blue-500 text-white'
+                : 'text-slate-400 hover:text-white'
                 }`}
             >
               Milestones
@@ -227,8 +227,8 @@ export function CampaignDetail({ campaign, onContribute, onVote, userAddress, wa
             <button
               onClick={() => setActiveTab('rewards')}
               className={`flex-1 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === 'rewards'
-                  ? 'bg-blue-500 text-white'
-                  : 'text-slate-400 hover:text-white'
+                ? 'bg-blue-500 text-white'
+                : 'text-slate-400 hover:text-white'
                 }`}
             >
               Rewards
@@ -236,8 +236,8 @@ export function CampaignDetail({ campaign, onContribute, onVote, userAddress, wa
             <button
               onClick={() => setActiveTab('contributions')}
               className={`flex-1 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === 'contributions'
-                  ? 'bg-blue-500 text-white'
-                  : 'text-slate-400 hover:text-white'
+                ? 'bg-blue-500 text-white'
+                : 'text-slate-400 hover:text-white'
                 }`}
             >
               History
@@ -315,10 +315,10 @@ export function CampaignDetail({ campaign, onContribute, onVote, userAddress, wa
                       <div
                         key={milestone.id}
                         className={`border rounded-xl p-5 space-y-4 ${milestone.released
-                            ? 'bg-green-500/5 border-green-500/20'
-                            : milestone.unlocked
-                              ? 'bg-blue-500/5 border-blue-500/20'
-                              : 'bg-slate-800/30 border-slate-700/30'
+                          ? 'bg-green-500/5 border-green-500/20'
+                          : milestone.unlocked
+                            ? 'bg-blue-500/5 border-blue-500/20'
+                            : 'bg-slate-800/30 border-slate-700/30'
                           }`}
                       >
                         <div className="flex items-start justify-between">
@@ -626,9 +626,9 @@ export function CampaignDetail({ campaign, onContribute, onVote, userAddress, wa
               <div className="flex items-center justify-between text-sm">
                 <span className="text-slate-400">Status:</span>
                 <span className={`font-medium ${campaign.status === 'active' ? 'text-blue-400' :
-                    campaign.status === 'successful' ? 'text-green-400' :
-                      campaign.status === 'failed' ? 'text-red-400' :
-                        'text-slate-400'
+                  campaign.status === 'successful' ? 'text-green-400' :
+                    campaign.status === 'failed' ? 'text-red-400' :
+                      'text-slate-400'
                   }`}>
                   {campaign.status.charAt(0).toUpperCase() + campaign.status.slice(1)}
                 </span>
@@ -664,7 +664,7 @@ export function CampaignDetail({ campaign, onContribute, onVote, userAddress, wa
             <div className="space-y-3 text-sm">
               <div className="flex justify-between">
                 <span className="text-slate-400">Network:</span>
-                <span className="text-white">Polygon Amoy</span>
+                <span className="text-white">Localhost</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-400">Campaign ID:</span>
@@ -732,7 +732,7 @@ export function CampaignDetail({ campaign, onContribute, onVote, userAddress, wa
               <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-4 space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-slate-400">Network</span>
-                  <span className="text-white">Polygon Amoy</span>
+                  <span className="text-white">Localhost</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Amount</span>

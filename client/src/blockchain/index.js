@@ -4,8 +4,8 @@ export {
   getCurrentAccount,
   getProvider,
   getSigner,
-  switchToPolygonAmoy,
-  isPolygonAmoy,
+  switchToLocalNetwork,
+  isLocalNetwork,
   isMetaMaskInstalled,
   onAccountsChanged,
   onChainChanged,
@@ -35,8 +35,8 @@ export {
 // Export config
 export {
   CONTRACT_ADDRESS,
-  POLYGON_AMOY_CHAIN_ID,
-  POLYGON_AMOY_RPC_URL,
-  POLYGON_AMOY_BLOCK_EXPLORER,
-  POLYGON_AMOY_NETWORK,
+  LOCAL_CHAIN_ID,
+  LOCAL_RPC_URL,
+  LOCAL_BLOCK_EXPLORER,
+  LOCAL_NETWORK,
 } from './config';

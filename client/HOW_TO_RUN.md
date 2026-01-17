@@ -4,8 +4,8 @@
 
 - [ ] Node.js installed (v18 or higher)
 - [ ] MetaMask browser extension installed
-- [ ] Contract deployed to Polygon Amoy (or ready to deploy)
-- [ ] Polygon Amoy testnet MATIC in your wallet
+- [ ] Contract deployed to Base Sepolia (or ready to deploy)
+- [ ] Base Sepolia testnet MATIC in your wallet
 
 ---
 
@@ -51,7 +51,7 @@ This will install all required packages including:
 
 2. Make sure you have a `.env` file with:
    ```
-   AMOY_RPC=https://rpc-amoy.polygon.technology/
+   AMOY_RPC=https://sepolia.base.org
    PRIVATE_KEY=your_private_key_here
    ```
 
@@ -66,7 +66,7 @@ This will install all required packages including:
 ### Step 4: Get Test MATIC (if needed)
 
 1. Visit [Polygon Faucet](https://faucet.polygon.technology/)
-2. Select "Polygon Amoy" network
+2. Select "Base Sepolia" network
 3. Enter your MetaMask wallet address
 4. Request test MATIC tokens
 5. Wait for tokens to arrive (usually instant)
@@ -95,7 +95,7 @@ You should see output like:
 1. Click the **"Connect Wallet"** button in the header
 2. MetaMask will pop up asking for permission
 3. Click **"Connect"** or **"Next"** then **"Connect"**
-4. If you're not on Polygon Amoy, you'll see a prompt to switch networks
+4. If you're not on Base Sepolia, you'll see a prompt to switch networks
 5. Click **"OK"** to switch automatically, or manually switch in MetaMask
 
 ### Step 8: Test the Application
@@ -135,15 +135,15 @@ You should see output like:
 ### ❌ "MetaMask is not installed"
 **Solution:** Install MetaMask browser extension from [metamask.io](https://metamask.io)
 
-### ❌ "Please switch to Polygon Amoy testnet"
+### ❌ "Please switch to Base Sepolia testnet"
 **Solution:** 
 - Click OK when prompted, OR
 - In MetaMask: Click network dropdown → Add Network → Enter:
-  - Network Name: Polygon Amoy
-  - RPC URL: https://rpc-amoy.polygon.technology/
-  - Chain ID: 80002
+  - Network Name: Base Sepolia
+  - RPC URL: https://sepolia.base.org
+  - Chain ID: 84532
   - Currency: MATIC
-  - Block Explorer: https://amoy.polygonscan.com/
+  - Block Explorer: https://sepolia.basescan.org/
 
 ### ❌ "Insufficient funds"
 **Solution:** Get test MATIC from [Polygon Faucet](https://faucet.polygon.technology/)
@@ -153,7 +153,7 @@ You should see output like:
 - Check browser console (F12) for error details
 - Ensure you have enough MATIC for gas
 - Verify contract address is correct
-- Make sure you're on Polygon Amoy network
+- Make sure you're on Base Sepolia network
 
 ### ❌ Port 5173 already in use
 **Solution:** 
@@ -216,10 +216,10 @@ npm run preview
 
 ## Network Information
 
-- **Network:** Polygon Amoy Testnet
-- **Chain ID:** 80002
-- **RPC URL:** https://rpc-amoy.polygon.technology/
-- **Block Explorer:** https://amoy.polygonscan.com/
+- **Network:** Base Sepolia Testnet
+- **Chain ID:** 84532
+- **RPC URL:** https://sepolia.base.org
+- **Block Explorer:** https://sepolia.basescan.org/
 - **Currency:** MATIC (test tokens)
 
 ---
@@ -228,6 +228,6 @@ npm run preview
 
 1. Check browser console (F12) for errors
 2. Verify contract address is correct
-3. Ensure you're on Polygon Amoy network
+3. Ensure you're on Base Sepolia network
 4. Check you have test MATIC
 5. Review the README.md for more details

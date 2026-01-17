@@ -1,6 +1,6 @@
 # Blockchain Crowdfunding Platform
 
-A decentralized crowdfunding platform built with React, Vite, and Solidity smart contracts deployed on Polygon Amoy testnet.
+A decentralized crowdfunding platform built with React, Vite, and Solidity smart contracts deployed on Base Sepolia testnet.
 
 ## Features
 
@@ -8,7 +8,7 @@ A decentralized crowdfunding platform built with React, Vite, and Solidity smart
 - ✅ **Create Campaigns** - Deploy campaigns directly on the blockchain
 - ✅ **View Campaigns** - Load and display all campaigns from the blockchain
 - ✅ **Donate to Campaigns** - Contribute MATIC to campaigns with real-time updates
-- ✅ **Polygon Amoy Network** - Automatic network detection and switching
+- ✅ **Base Sepolia Network** - Automatic network detection and switching
 - ✅ **Real-time Blockchain Data** - All data is fetched directly from smart contracts
 - ✅ **Transaction History** - View all contributions on-chain
 - ✅ **Responsive UI** - Modern, beautiful interface built with Tailwind CSS
@@ -18,7 +18,7 @@ A decentralized crowdfunding platform built with React, Vite, and Solidity smart
 - Node.js (v18 or higher)
 - npm or yarn
 - MetaMask browser extension installed
-- Polygon Amoy testnet MATIC (get from [Polygon Faucet](https://faucet.polygon.technology/))
+- Base Sepolia testnet MATIC (get from [Polygon Faucet](https://faucet.polygon.technology/))
 
 ## Setup Instructions
 
@@ -37,28 +37,28 @@ Edit `src/blockchain/config.js` and replace the placeholder with your deployed c
 export const CONTRACT_ADDRESS = "0xYOUR_DEPLOYED_CONTRACT_ADDRESS";
 ```
 
-**Important:** Make sure you have deployed your contract to Polygon Amoy testnet and have the correct address.
+**Important:** Make sure you have deployed your contract to Base Sepolia testnet and have the correct address.
 
-### 3. Get Polygon Amoy Testnet MATIC
+### 3. Get Base Sepolia Testnet MATIC
 
 1. Visit [Polygon Faucet](https://faucet.polygon.technology/)
-2. Select "Polygon Amoy" network
+2. Select "Base Sepolia" network
 3. Enter your wallet address
 4. Request test MATIC tokens
 
 ### 4. Configure MetaMask
 
-The app will automatically prompt you to switch to Polygon Amoy network. If you need to add it manually:
+The app will automatically prompt you to switch to Base Sepolia network. If you need to add it manually:
 
 1. Open MetaMask
 2. Click on the network dropdown
 3. Select "Add Network" or "Add a network manually"
 4. Enter the following details:
-   - **Network Name:** Polygon Amoy
-   - **RPC URL:** https://rpc-amoy.polygon.technology/
-   - **Chain ID:** 80002
+   - **Network Name:** Base Sepolia
+   - **RPC URL:** https://sepolia.base.org
+   - **Chain ID:** 84532
    - **Currency Symbol:** MATIC
-   - **Block Explorer:** https://amoy.polygonscan.com/
+   - **Block Explorer:** https://sepolia.basescan.org/
 
 ### 5. Run the Development Server
 
@@ -95,7 +95,7 @@ client/Blockchaincrowdfundingplatform/
 
 1. Click the "Connect Wallet" button in the header
 2. Approve the MetaMask connection request
-3. If you're not on Polygon Amoy, the app will prompt you to switch networks
+3. If you're not on Base Sepolia, the app will prompt you to switch networks
 4. Once connected, your wallet address will be displayed
 
 ### Creating a Campaign
@@ -141,10 +141,10 @@ The platform uses the following smart contract functions:
 
 ## Network Information
 
-- **Network:** Polygon Amoy Testnet
-- **Chain ID:** 80002
-- **RPC URL:** https://rpc-amoy.polygon.technology/
-- **Block Explorer:** https://amoy.polygonscan.com/
+- **Network:** Base Sepolia Testnet
+- **Chain ID:** 84532
+- **RPC URL:** https://sepolia.base.org
+- **Block Explorer:** https://sepolia.basescan.org/
 - **Currency:** MATIC (test tokens)
 
 ## Troubleshooting
@@ -153,7 +153,7 @@ The platform uses the following smart contract functions:
 - Install the MetaMask browser extension
 - Refresh the page
 
-### "Please switch to Polygon Amoy testnet"
+### "Please switch to Base Sepolia testnet"
 - The app will automatically prompt you to switch
 - Click "OK" when prompted
 - If it doesn't work, manually add the network (see Setup Instructions)
@@ -164,11 +164,11 @@ The platform uses the following smart contract functions:
 
 ### "Insufficient funds"
 - Get test MATIC from the [Polygon Faucet](https://faucet.polygon.technology/)
-- Make sure you're on Polygon Amoy network
+- Make sure you're on Base Sepolia network
 
 ### "Transaction failed"
 - Check that you have enough MATIC for gas fees
-- Ensure you're on the correct network (Polygon Amoy)
+- Ensure you're on the correct network (Base Sepolia)
 - Verify the contract address is correct
 
 ## Building for Production
@@ -190,7 +190,7 @@ The built files will be in the `dist/` directory.
 - **Sonner** - Toast notifications
 - **Solidity** - Smart contracts
 - **Hardhat** - Development environment
-- **Polygon Amoy** - Test network
+- **Base Sepolia** - Test network
 
 ## Security Notes
 

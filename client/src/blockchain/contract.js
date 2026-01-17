@@ -17,7 +17,7 @@ export async function getContract() {
     throw new Error("No signer available. Please connect your wallet.");
   }
 
-  return new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
+  return new ethers.Contract(CONTRACT_ADDRESS, abi.abi, signer);
 }
 
 /**
@@ -34,7 +34,7 @@ export function getContractReadOnly() {
     throw new Error("No provider available. Please install MetaMask.");
   }
 
-  return new ethers.Contract(CONTRACT_ADDRESS, abi, provider);
+  return new ethers.Contract(CONTRACT_ADDRESS, abi.abi, provider);
 }
 
 /**
@@ -113,10 +113,9 @@ export async function getCampaigns(offset = 0, limit = 20) {
     // Transform the data
     // Note: Donators and donations are NOT included in the list view anymore for performance
     return campaigns.map((campaign, index) => {
-      // Calculate the real ID based on offset
-      const realId = offset + index;
-      return formatCampaign(campaign, realId, [], []);
+      return formatCampaign(campaign, index, campaign.donators, campaign.donations);
     });
+
   } catch (error) {
     console.error("Error getting campaigns:", error);
     throw error;

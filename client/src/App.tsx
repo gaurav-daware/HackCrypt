@@ -11,7 +11,7 @@ import {
   onAccountsChanged,
   onChainChanged,
   removeListeners,
-  isPolygonAmoy,
+  isLocalNetwork,
 } from './blockchain/wallet';
 import {
   getCampaigns,
@@ -95,9 +95,9 @@ export default function App() {
       setNetworkError('');
 
       // Check if on correct network
-      const isCorrectNetwork = await isPolygonAmoy();
+      const isCorrectNetwork = await isLocalNetwork();
       if (!isCorrectNetwork) {
-        setNetworkError('Please switch to Polygon Amoy testnet');
+        setNetworkError('Please switch to Localhost testnet');
         setCampaigns([]);
         return;
       }
@@ -125,8 +125,8 @@ export default function App() {
             deadline < now
               ? 'failed'
               : parseFloat(bc.amountCollected) >= parseFloat(bc.target)
-              ? 'successful'
-              : 'active';
+                ? 'successful'
+                : 'active';
         }
 
         return {
@@ -136,7 +136,7 @@ export default function App() {
           description: bc.description,
           goal: parseFloat(bc.target),
           raised: parseFloat(bc.amountCollected),
-          currency: 'MATIC',
+          currency: 'ETH',
           deadline: deadline,
           category: 'Blockchain',
           imageUrl:
@@ -267,17 +267,17 @@ export default function App() {
           setSelectedCampaign((prev) =>
             prev
               ? {
-                  ...prev,
-                  raised: parseFloat(refreshedCampaign.amountCollected),
-                  status:
-                    refreshedCampaign.state === 1
-                      ? 'successful'
-                      : refreshedCampaign.state === 2
+                ...prev,
+                raised: parseFloat(refreshedCampaign.amountCollected),
+                status:
+                  refreshedCampaign.state === 1
+                    ? 'successful'
+                    : refreshedCampaign.state === 2
                       ? 'failed'
                       : refreshedCampaign.state === 3
-                      ? 'withdrawn'
-                      : 'active',
-                }
+                        ? 'withdrawn'
+                        : 'active',
+              }
               : null
           );
         }

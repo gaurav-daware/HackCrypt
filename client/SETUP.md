@@ -17,7 +17,7 @@ npm install
 ## Step 3: Get Test MATIC
 
 1. Visit https://faucet.polygon.technology/
-2. Select "Polygon Amoy"
+2. Select "Base Sepolia"
 3. Enter your wallet address
 4. Request tokens
 
@@ -31,15 +31,15 @@ npm run dev
 
 1. Click "Connect Wallet" in the header
 2. Approve MetaMask connection
-3. Switch to Polygon Amoy if prompted
+3. Switch to Base Sepolia if prompted
 
 ## Important Notes
 
 ⚠️ **Contract Address**: You MUST update the contract address in `config.js` before using the app.
 
-⚠️ **Network**: The app requires Polygon Amoy testnet. It will automatically prompt you to switch.
+⚠️ **Network**: The app requires Base Sepolia testnet. It will automatically prompt you to switch.
 
-⚠️ **Test Tokens**: You need Polygon Amoy MATIC for gas fees. Get them from the faucet.
+⚠️ **Test Tokens**: You need Base Sepolia MATIC for gas fees. Get them from the faucet.
 
 ## File Structure
 
@@ -56,7 +56,7 @@ src/blockchain/
 - [ ] Contract address updated in config.js
 - [ ] Dependencies installed (npm install)
 - [ ] MetaMask installed and connected
-- [ ] Polygon Amoy network added to MetaMask
+- [ ] Base Sepolia network added to MetaMask
 - [ ] Test MATIC obtained from faucet
 - [ ] Can connect wallet successfully
 - [ ] Can view campaigns (if any exist)
@@ -68,7 +68,7 @@ src/blockchain/
 **"Contract address not configured"**
 → Update CONTRACT_ADDRESS in src/blockchain/config.js
 
-**"Please switch to Polygon Amoy"**
+**"Please switch to Base Sepolia"**
 → Click OK when prompted, or manually add the network
 
 **"Insufficient funds"**

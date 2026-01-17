@@ -16,7 +16,7 @@ export const CONTRACT_ADDRESS = "0x30732864C1fF27Cbe992F61Ed21783761Dc72911";
 
 **How to get it:**
 - Check your deployment output when you ran: `npx hardhat run scripts/verify/deploy.js --network amoy`
-- Or check Polygon Amoy explorer: https://amoy.polygonscan.com/ (search your wallet address)
+- Or check Base Sepolia explorer: https://sepolia.basescan.org/ (search your wallet address)
 
 ---
 
@@ -25,7 +25,7 @@ export const CONTRACT_ADDRESS = "0x30732864C1fF27Cbe992F61Ed21783761Dc72911";
 
 **Required variables:**
 ```env
-AMOY_RPC=https://rpc-amoy.polygon.technology/
+AMOY_RPC=https://sepolia.base.org
 PRIVATE_KEY=your_private_key_here
 ```
 
@@ -53,9 +53,9 @@ PRIVATE_KEY=your_private_key_here
 ## ✅ Already Configured (No Changes Needed)
 
 ### Network Configuration
-- ✅ Polygon Amoy Chain ID: 80002
-- ✅ RPC URL: https://rpc-amoy.polygon.technology/
-- ✅ Block Explorer: https://amoy.polygonscan.com/
+- ✅ Base Sepolia Chain ID: 84532
+- ✅ RPC URL: https://sepolia.base.org
+- ✅ Block Explorer: https://sepolia.basescan.org/
 - ✅ Network name and currency settings
 
 ### ABI Configuration
@@ -92,7 +92,7 @@ cat src/blockchain/config.js
 ```
 
 ### Verify Contract is Deployed:
-1. Go to https://amoy.polygonscan.com/
+1. Go to https://sepolia.basescan.org/
 2. Search for your contract address
 3. Should show contract code and transactions
 
@@ -114,7 +114,7 @@ cat src/blockchain/config.js
 - **Example:** `0x30732864C1fF27Cbe992F61Ed21783761Dc72911`
 
 ### "Contract not found on network"
-- **Fix:** Verify contract is deployed to Polygon Amoy
+- **Fix:** Verify contract is deployed to Base Sepolia
 - Check block explorer with your contract address
 
 ---

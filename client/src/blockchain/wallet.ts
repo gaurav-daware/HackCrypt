@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { POLYGON_AMOY_CHAIN_ID, POLYGON_AMOY_NETWORK } from "./config";
+import { LOCAL_CHAIN_ID, LOCAL_NETWORK } from "./config";
 
 // Add window.ethereum type definition
 declare global {
@@ -41,12 +41,12 @@ export async function getCurrentChainId(): Promise<number> {
 }
 
 /**
- * Check if connected to Polygon Amoy network
+ * Check if connected to Localhost network
  */
-export async function isPolygonAmoy(): Promise<boolean> {
+export async function isLocalNetwork(): Promise<boolean> {
     try {
         const chainId = await getCurrentChainId();
-        return chainId === POLYGON_AMOY_CHAIN_ID;
+        return chainId === LOCAL_CHAIN_ID;
     } catch (error) {
         console.error("Error checking network:", error);
         return false;
@@ -54,31 +54,31 @@ export async function isPolygonAmoy(): Promise<boolean> {
 }
 
 /**
- * Switch to Polygon Amoy network with better error handling
+ * Switch to Localhost network with better error handling
  */
-export async function switchToPolygonAmoy(): Promise<void> {
+export async function switchToLocalNetwork(): Promise<void> {
     if (!isMetaMaskInstalled()) {
         throw new Error("MetaMask is not installed. Please install MetaMask to continue.");
     }
 
     try {
-        // Try to switch to Polygon Amoy
+        // Try to switch to Localhost
         await window.ethereum.request({
             method: "wallet_switchEthereumChain",
-            params: [{ chainId: POLYGON_AMOY_NETWORK.chainId }],
+            params: [{ chainId: LOCAL_NETWORK.chainId }],
         });
     } catch (switchError: any) {
         // This error code indicates that the chain has not been added to MetaMask
-        if (switchError.code === 4902) {
+        if (switchError.code === 4902 || switchError.code === -32603) {
             try {
-                // Add Polygon Amoy network to MetaMask
+                // Add Localhost network to MetaMask
                 await window.ethereum.request({
                     method: "wallet_addEthereumChain",
-                    params: [POLYGON_AMOY_NETWORK],
+                    params: [LOCAL_NETWORK],
                 });
             } catch (addError: any) {
                 console.error("Failed to add network:", addError);
-                throw new Error("Failed to add Polygon Amoy network to MetaMask");
+                throw new Error("Failed to add Localhost network to MetaMask");
             }
         } else if (switchError.code === 4001) {
             // User rejected the request
@@ -111,17 +111,17 @@ export async function connectWallet(): Promise<string> {
 
         const address = accounts[0];
 
-        // Check if connected to Polygon Amoy
-        const isCorrectNetwork = await isPolygonAmoy();
+        // Check if connected to Localhost
+        const isCorrectNetwork = await isLocalNetwork();
 
         if (!isCorrectNetwork) {
             // Automatically attempt to switch (better UX than confirm dialog)
             try {
-                await switchToPolygonAmoy();
+                await switchToLocalNetwork();
             } catch (switchError: any) {
                 // If user cancels, still return the address but notify them
                 console.warn("Network switch cancelled:", switchError);
-                throw new Error("Please switch to Polygon Amoy testnet to use this app.");
+                throw new Error("Please switch to Localhost testnet to use this app.");
             }
         }
 
@@ -212,7 +212,7 @@ export async function getSigner(): Promise<ethers.JsonRpcSigner | null> {
 /**
  * Get wallet balance
  * @param {string} address - Wallet address
- * @returns {Promise<string>} Balance in MATIC
+ * @returns {Promise<string>} Balance in ETH
  */
 export async function getBalance(address: string): Promise<string> {
     const provider = getProvider();

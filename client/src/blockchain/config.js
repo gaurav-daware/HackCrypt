@@ -1,20 +1,21 @@
-// Polygon Amoy Testnet Configuration
-export const POLYGON_AMOY_CHAIN_ID = 80002;
-export const POLYGON_AMOY_RPC_URL = "https://rpc-amoy.polygon.technology/";
-export const POLYGON_AMOY_BLOCK_EXPLORER = "https://amoy.polygonscan.com/";
+// Localhost Hardhat Configuration
 
-// Replace with your deployed contract address
-export const CONTRACT_ADDRESS = "0x7177cDef8cB1CA8A23aB40899a4455a55F303e3c";
+export const LOCAL_CHAIN_ID = 31337;
+export const LOCAL_RPC_URL = "http://127.0.0.1:8545";
+export const LOCAL_BLOCK_EXPLORER = "http://localhost:8545";
 
-// Network configuration for MetaMask
-export const POLYGON_AMOY_NETWORK = {
-  chainId: `0x${POLYGON_AMOY_CHAIN_ID.toString(16)}`,
-  chainName: "Polygon Amoy",
+// Deployed contract address (Hardhat default)
+export const CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+
+// MetaMask network config
+export const LOCAL_NETWORK = {
+  chainId: `0x${LOCAL_CHAIN_ID.toString(16)}`,
+  chainName: "Hardhat Localhost",
   nativeCurrency: {
-    name: "MATIC",
-    symbol: "MATIC",
+    name: "Ethereum",
+    symbol: "ETH",
     decimals: 18,
   },
-  rpcUrls: [POLYGON_AMOY_RPC_URL],
-  blockExplorerUrls: [POLYGON_AMOY_BLOCK_EXPLORER],
+  rpcUrls: [LOCAL_RPC_URL],
+  blockExplorerUrls: [LOCAL_BLOCK_EXPLORER],
 };
